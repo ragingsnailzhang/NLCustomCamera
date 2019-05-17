@@ -1,0 +1,6 @@
+framework module NLCustomCamera {
+  umbrella header "NLCustomCamera-umbrella.h"
+
+  export *
+  module * { export * }
+}

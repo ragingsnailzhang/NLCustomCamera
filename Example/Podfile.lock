@@ -1,0 +1,16 @@
+PODS:
+  - NLCustomCamera (0.1.0)
+
+DEPENDENCIES:
+  - NLCustomCamera (from `../`)
+
+EXTERNAL SOURCES:
+  NLCustomCamera:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NLCustomCamera: e994485f6baa12212859120c5714c6e0d2007561
+
+PODFILE CHECKSUM: 95de942fdf842c49ddf70e87651de2166da528be
+
+COCOAPODS: 1.6.2

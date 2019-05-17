@@ -1,0 +1,22 @@
+{
+  "name": "NLCustomCamera",
+  "version": "0.1.0",
+  "summary": "A short description of NLCustomCamera.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/wz_yinglong/NLCustomCamera",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "wz_yinglong": "wz_yinglong@163.com"
+  },
+  "source": {
+    "git": "https://github.com/wz_yinglong/NLCustomCamera.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "NLCustomCamera/Classes/**/*"
+}

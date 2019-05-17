@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'NLCustomCamera_Example' do
+  pod 'NLCustomCamera', :path => '../'
+
+  target 'NLCustomCamera_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
