@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'NLCustomCamera'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of NLCustomCamera.'
+  s.summary          = '自定义相机.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,22 +21,29 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/wz_yinglong/NLCustomCamera'
+  s.homepage         = 'https://github.com/wzyinglong/NLCustomCamera'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'wz_yinglong' => 'wz_yinglong@163.com' }
-  s.source           = { :git => 'https://github.com/wz_yinglong/NLCustomCamera.git', :tag => s.version.to_s }
+  s.author           = { 'wzyinglong' => 'wz_yinglong@163.com' }
+  s.source           = { :git => 'https://github.com/wzyinglong/NLCustomCamera.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
+  s.requires_arc = true
 
   s.source_files = 'NLCustomCamera/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'NLCustomCamera' => ['NLCustomCamera/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'NLCustomCamera' => ['NLCustomCamera/Assets/**/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'AFNetworking'
+  s.dependency 'GPUImage'
+  s.dependency 'TZImagePickerController'
+  s.dependency 'Masonry'
+  s.dependency 'ZFPlayer', '~> 2.1.6'
+  s.dependency 'MJExtension', '~> 3.0.13'
+  s.dependency 'ReactiveObjC'
 end

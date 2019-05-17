@@ -1,22 +1,51 @@
 {
   "name": "NLCustomCamera",
   "version": "0.1.0",
-  "summary": "A short description of NLCustomCamera.",
+  "summary": "自定义相机.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/wz_yinglong/NLCustomCamera",
+  "homepage": "https://github.com/wzyinglong/NLCustomCamera",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "wz_yinglong": "wz_yinglong@163.com"
+    "wzyinglong": "wz_yinglong@163.com"
   },
   "source": {
-    "git": "https://github.com/wz_yinglong/NLCustomCamera.git",
+    "git": "https://github.com/wzyinglong/NLCustomCamera.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "NLCustomCamera/Classes/**/*"
+  "requires_arc": true,
+  "source_files": "NLCustomCamera/Classes/**/*",
+  "resource_bundles": {
+    "NLCustomCamera": [
+      "NLCustomCamera/Assets/**/*"
+    ]
+  },
+  "dependencies": {
+    "AFNetworking": [
+
+    ],
+    "GPUImage": [
+
+    ],
+    "TZImagePickerController": [
+
+    ],
+    "Masonry": [
+
+    ],
+    "ZFPlayer": [
+      "~> 2.1.6"
+    ],
+    "MJExtension": [
+      "~> 3.0.13"
+    ],
+    "ReactiveObjC": [
+
+    ]
+  }
 }

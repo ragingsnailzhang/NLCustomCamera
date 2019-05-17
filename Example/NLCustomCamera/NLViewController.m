@@ -7,6 +7,7 @@
 //
 
 #import "NLViewController.h"
+#import <NLCustomCamera.h>
 
 @interface NLViewController ()
 
@@ -20,10 +21,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NLRecordParam *param = [NLRecordParam recordConfigWithVideoRatio:NLShootRatioFullScreen shootMode:photoVideoMode position:AVCaptureDevicePositionBack maxRecordTime:15.0f minRecordTime:1.0f isCompression:NO waterMark:nil isFilter:YES isShowBeautyBtn:NO isShowAlbumBtn:YES currentVC:self];
+    [NLRecordManager shareManager].recordParam = param;
+    NLPhotoViewController *page = [NLPhotoViewController new];
+    [self presentViewController:page animated:YES completion:nil];
 }
 
 @end
