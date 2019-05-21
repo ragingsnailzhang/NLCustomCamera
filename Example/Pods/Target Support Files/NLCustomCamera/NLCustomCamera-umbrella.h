@@ -11,7 +11,6 @@
 #endif
 
 #import "NLConfigure.h"
-#import "NLCustomCamera.h"
 #import "NLENUM.h"
 #import "NLColorCell.h"
 #import "NLCustomFontLabel.h"
@@ -24,11 +23,13 @@
 #import "NLFontView.h"
 #import "UIColor+NLCustomColor.h"
 #import "UIView+NLAfterTransformPoint.h"
+#import "NLCustomCamera.h"
 #import "NLFilterCell.h"
 #import "NLFilterView.h"
 #import "NLHandleImageManager.h"
 #import "TBMoviePlayer.h"
 #import "GPUImageBeautifyFilter.h"
+#import "GPUImageView+NLCustom.h"
 #import "NLBottomOptionsView.h"
 #import "NLFileManager.h"
 #import "NLGPUImageView.h"
@@ -43,6 +44,8 @@
 #import "NLTimeView.h"
 #import "NLTopOptionsView.h"
 #import "NLWaterMarkManager.h"
+#import "NSObject+NLTools.h"
+#import "UIImage+NLImage.h"
 
 FOUNDATION_EXPORT double NLCustomCameraVersionNumber;
 FOUNDATION_EXPORT const unsigned char NLCustomCameraVersionString[];

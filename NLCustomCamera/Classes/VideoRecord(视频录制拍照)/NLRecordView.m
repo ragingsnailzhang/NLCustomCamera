@@ -18,6 +18,8 @@
 //滤镜按钮
 @property(nonatomic,strong)UIButton *filterBtn;
 
+@property(nonatomic,strong)GPUImageFilter *fullFilter;
+
 @end
 
 @implementation NLRecordView
@@ -142,7 +144,10 @@
         self.progressView.alpha = 1-self.photoBtn.alpha;
     }];
     if (sender.tag == 101) {//因要求摄像不允许加滤镜,所以去掉滤镜
-        [[NLRecordManager shareManager]changeFilter:[GPUImageFilter new]];
+        if (self.fullFilter == nil) {
+            self.fullFilter = [GPUImageFilter new];
+        }
+        [[NLRecordManager shareManager]changeFilter:self.fullFilter];
     }
 }
 //录制

@@ -319,7 +319,10 @@ static dispatch_once_t onceToken;
 }
 //MARK:摄像头输出代理方法
 - (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer{
-    self.currentFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.currentFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer);
+    });
 }
 //MARK:视频相关参数设置
 //获取视频输出路径
@@ -498,10 +501,10 @@ static dispatch_once_t onceToken;
 -(NLGPUImageView *)displayView {
     CGSize size = [self getVideoOutputSize:nil];
     if (_displayView == nil || (!CGSizeEqualToSize(size, _displayView.frame.size))) {
-        _displayView = [[NLGPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height) videoCamera:self.shootCamera];
+        _displayView = [[NLGPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _displayView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     }
-    
+
     return _displayView;
 }
 //MARK:私有方法

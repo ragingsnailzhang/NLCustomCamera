@@ -1,25 +1,9 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
   - GPUImage (0.1.7)
   - Masonry (1.1.0)
   - MJExtension (3.0.17)
   - NLCustomCamera (0.1.0):
-    - AFNetworking
-    - GPUImage
+    - GPUImage (~> 0.1.7)
     - Masonry
     - MJExtension (~> 3.0.13)
     - ReactiveObjC
@@ -35,7 +19,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AFNetworking
     - GPUImage
     - Masonry
     - MJExtension
@@ -48,11 +31,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
-  NLCustomCamera: 4a63869ea82472c782105c7926f904902ce9d6ec
+  NLCustomCamera: 88a201c277b190f3b4d6cb49ffaff011003f9a55
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   TZImagePickerController: 7850b158d025065b162a1a963d445040b828abc9
   ZFPlayer: 833cb3974b619bfd01a0ec1ebaabfe6f629e85b4

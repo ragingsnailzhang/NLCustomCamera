@@ -26,11 +26,8 @@
     ]
   },
   "dependencies": {
-    "AFNetworking": [
-
-    ],
     "GPUImage": [
-
+      "~> 0.1.7"
     ],
     "TZImagePickerController": [
 

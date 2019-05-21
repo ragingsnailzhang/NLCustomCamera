@@ -39,8 +39,8 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'AFNetworking'
-  s.dependency 'GPUImage'
+  # s.dependency 'AFNetworking'
+  s.dependency 'GPUImage', '~> 0.1.7'
   s.dependency 'TZImagePickerController'
   s.dependency 'Masonry'
   s.dependency 'ZFPlayer', '~> 2.1.6'

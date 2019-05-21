@@ -17,6 +17,8 @@
 //数据源
 @property(nonatomic,strong) NSMutableArray *dataSource;
 
+@property(nonatomic,strong) GPUImageFilter *filter;
+
 @end
 
 @implementation NLFilterView
@@ -89,9 +91,12 @@
             [self.delegate changeFilter:filter currentFilterIndex:indexPath.item];
         }
     }else{
-        GPUImageFilter *filter = [GPUImageFilter new];
+        if (self.filter == nil) {
+            self.filter = [GPUImageFilter new];
+        }
+//        GPUImageFilter *filter = [GPUImageFilter new];
         if (self.delegate && [self.delegate respondsToSelector:@selector(changeFilter:currentFilterIndex:)]) {
-            [self.delegate changeFilter:filter currentFilterIndex:indexPath.item];
+            [self.delegate changeFilter:self.filter currentFilterIndex:indexPath.item];
         }
     }
     [self.filterCollectView reloadData];
