@@ -391,15 +391,28 @@ static dispatch_once_t onceToken;
     CGFloat bitsPerPixel = 6.f;
     NSUInteger bitsPerSecond = numPixels * bitsPerPixel;
     
-    NSDictionary *videoCompressionSettings = @{AVVideoCodecKey:AVVideoCodecTypeH264,
-                                               AVVideoScalingModeKey : AVVideoScalingModeResizeAspect,
-                                               AVVideoWidthKey:@(width),
-                                               AVVideoHeightKey:@(height),
-                                               AVVideoCompressionPropertiesKey:@{AVVideoAverageBitRateKey:[NSNumber numberWithInteger:bitsPerSecond],
-                                                                                 AVVideoMaxKeyFrameIntervalKey:[NSNumber numberWithInteger:30],
-                                                                                 AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel}
-                                               };
-    return videoCompressionSettings;
+    if (@available(iOS 11.0, *)) {
+        NSDictionary *videoCompressionSettings = @{AVVideoCodecKey:AVVideoCodecTypeH264,
+                                                   AVVideoScalingModeKey : AVVideoScalingModeResizeAspect,
+                                                   AVVideoWidthKey:@(width),
+                                                   AVVideoHeightKey:@(height),
+                                                   AVVideoCompressionPropertiesKey:@{AVVideoAverageBitRateKey:[NSNumber numberWithInteger:bitsPerSecond],
+                                                                                     AVVideoMaxKeyFrameIntervalKey:[NSNumber numberWithInteger:30],
+                                                                                     AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel}
+                                                   };
+        return videoCompressionSettings;
+    } else {
+        // Fallback on earlier versions
+        NSDictionary *videoCompressionSettings = @{AVVideoCodecKey:AVVideoCodecH264,
+                                                   AVVideoScalingModeKey : AVVideoScalingModeResizeAspect,
+                                                   AVVideoWidthKey:@(width),
+                                                   AVVideoHeightKey:@(height),
+                                                   AVVideoCompressionPropertiesKey:@{AVVideoAverageBitRateKey:[NSNumber numberWithInteger:bitsPerSecond],
+                                                                                     AVVideoMaxKeyFrameIntervalKey:[NSNumber numberWithInteger:30],
+                                                                                     AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel}
+                                                   };
+        return videoCompressionSettings;
+    }
 }
 //音频参数
 -(NSDictionary *)audioCompressionSettings{

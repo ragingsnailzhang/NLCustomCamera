@@ -49,7 +49,11 @@
     [self.view addSubview:self.showImgView];
     [self.showImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT);
+        } else {
+            make.bottom.equalTo(self.view).offset(-BOTTOM_VIEW_HEIGHT-SAFEAREA_BOTTOM_HEIGH);
+        }
         make.left.right.equalTo(self.view);
     }];
     //关闭按钮
@@ -66,7 +70,11 @@
     self.bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view).offset(-SAFEAREA_BOTTOM_HEIGH);
+        }
         make.height.mas_equalTo(BOTTOM_VIEW_HEIGHT);
         make.left.right.equalTo(self.view);
     }];
@@ -163,11 +171,21 @@
 -(void)updateShowImgViewConstraints:(BOOL)isEditing{
     if (isEditing) {
         [self.showImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT-FONT_STYLE_VIEW_HEIGHT);
+            if (@available(iOS 11.0, *)) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT-FONT_STYLE_VIEW_HEIGHT);
+            } else {
+                make.bottom.equalTo(self.view).offset(-BOTTOM_VIEW_HEIGHT-FONT_STYLE_VIEW_HEIGHT-SAFEAREA_BOTTOM_HEIGH);
+            }
         }];
     }else{
         [self.showImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT);
+            if (@available(iOS 11.0, *)) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-BOTTOM_VIEW_HEIGHT);
+            } else {
+                // Fallback on earlier versions
+                make.bottom.equalTo(self.view).offset(-SAFEAREA_BOTTOM_HEIGH-BOTTOM_VIEW_HEIGHT);
+
+            }
         }];
     }
 }

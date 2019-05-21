@@ -112,7 +112,7 @@
     NSDictionary *opts = [NSDictionary dictionaryWithObject:@(NO) forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:videoUrl options:opts]; // 初始化视频媒体文件
     NSUInteger second = 0;
-    second = urlAsset.duration.value / urlAsset.duration.timescale; // 获取视频总时长,单位秒
+    second = (NSUInteger)(urlAsset.duration.value / urlAsset.duration.timescale); // 获取视频总时长,单位秒
     return second;
 }
 
