@@ -15,7 +15,6 @@
 #import "NLSettingView.h"
 #import <objc/runtime.h>
 #import "NLFilterView.h"
-#import "NLFontEditViewController.h"
 #import "NLConfigure.h"
 #import "TBMoviePlayer.h"
 #import "TZImagePickerController.h"
@@ -229,12 +228,7 @@
         [self close];
     });
 }
--(void)pushEditPage{
-    NSLog(@"编辑滤镜界面");
-    NLFontEditViewController *editPage = [NLFontEditViewController new];
-    editPage.originalImage = [[NLRecordManager shareManager] getPhoto];
-    [self showViewController:editPage sender:nil];
-}
+
 -(void)showPreviewVideo{
     if (self.outputFileURL) {
         self.playerVC = [TBMoviePlayer new];
@@ -260,9 +254,7 @@
 }
 //MARK:TZImagePickerControllerDelegate
 -(void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto{
-    NLFontEditViewController *editPage = [NLFontEditViewController new];
-    editPage.originalImage = photos.firstObject;
-    [self showViewController:editPage sender:nil];
+    NSLog(@"拿到图片:%@",photos.firstObject);
 }
 //MARK:状态检测
 -(NLSettingView *)setView{

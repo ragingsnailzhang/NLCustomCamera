@@ -12,8 +12,6 @@
 
 -(void)selectedClick;
 
--(void)pushEditPage;
-
 -(void)cancleClick;
 
 

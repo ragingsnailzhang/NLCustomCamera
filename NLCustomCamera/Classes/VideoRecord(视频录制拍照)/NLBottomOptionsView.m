@@ -49,18 +49,6 @@
         make.centerY.equalTo(self);
     }];
     
-    //编辑
-    _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_editBtn setTitle:@"编辑" forState:UIControlStateNormal];
-    [_editBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _editBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_editBtn addTarget:self action:@selector(editClick) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_editBtn];
-    [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).offset(-40);
-        make.centerY.equalTo(self);
-    }];
-    
 }
 
 //删除
@@ -73,12 +61,6 @@
 -(void)selected{
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedClick)]) {
         [self.delegate selectedClick];
-    }
-}
-//编辑
--(void)editClick{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(pushEditPage)]) {
-        [self.delegate pushEditPage];
     }
 }
 -(void)setHidden:(BOOL)hidden{
