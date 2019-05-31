@@ -133,7 +133,8 @@
     if (![NLRecordManager shareManager].recordParam.isFilter) {//不开启滤镜
         self.filterBtn.hidden = YES;
     }else{
-        self.filterBtn.hidden = sender.tag == 101 ? YES:NO;
+//        self.filterBtn.hidden = sender.tag == 101 ? YES:NO;
+        self.filterBtn.hidden = NO;
     }
     [NLRecordManager shareManager].recordParam.getCurrentMode = sender.tag == 100 ? photoMode:videoMode;
     CGPoint center = self.line.center;

@@ -129,11 +129,7 @@ static dispatch_once_t onceToken;
     self.movieWriter.transform = [self transformFromCurrentVideoOrientationToOrientation:AVCaptureVideoOrientationPortrait];
     self.movieWriter.assetWriter.movieFragmentInterval = kCMTimeInvalid;
     
-    if (self.recordParam.isBeauty) {
-        [_beautifyFilter addTarget:self.movieWriter];
-    }else{
-        [self.cropFilter addTarget:self.movieWriter];
-    }
+    [self.currentFilter addTarget:self.movieWriter];
     self.shootCamera.audioEncodingTarget = self.movieWriter;
     [self.movieWriter startRecording];
     self.time = 0.0f;
@@ -179,7 +175,9 @@ static dispatch_once_t onceToken;
 //MARK:Action
 //切换摄像头
 -(void)turnCamera{
+    [self.shootCamera pauseCameraCapture];
     [self.shootCamera rotateCamera];
+    [self.shootCamera resumeCameraCapture];
     AVCaptureDevicePosition position = self.shootCamera.inputCamera.position;
     if (self.vcDelegate && [self.vcDelegate respondsToSelector:@selector(lightIsHidden:)]) {
         [self.vcDelegate lightIsHidden: position == AVCaptureDevicePositionBack ? NO : YES];

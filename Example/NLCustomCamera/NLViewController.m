@@ -28,7 +28,7 @@
         make.top.equalTo(self.view).offset(200);
     }];
     [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(__kindof UIControl * _Nullable x) {
-        NLRecordParam *param = [NLRecordParam recordConfigWithVideoRatio:NLShootRatioFullScreen shootMode:photoVideoMode position:AVCaptureDevicePositionBack maxRecordTime:15.0f minRecordTime:1.0f isCompression:NO waterMark:nil isFilter:YES isShowBeautyBtn:NO isShowAlbumBtn:YES currentVC:self];
+        NLRecordParam *param = [NLRecordParam recordConfigWithVideoRatio:NLShootRatioFullScreen shootMode:photoVideoMode position:AVCaptureDevicePositionBack maxRecordTime:15.0f minRecordTime:1.0f isCompression:NO waterMark:nil isFilter:YES isShowBeautyBtn:YES isShowAlbumBtn:YES currentVC:self];
         [NLRecordManager shareManager].recordParam = param;
         NLPhotoViewController *page = [NLPhotoViewController new];
         [self presentViewController:page animated:YES completion:nil];
