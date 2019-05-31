@@ -319,10 +319,7 @@ static dispatch_once_t onceToken;
 }
 //MARK:摄像头输出代理方法
 - (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.currentFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer);
-    });
+    self.currentFormatDescription = CMSampleBufferGetFormatDescription(sampleBuffer);
 }
 //MARK:视频相关参数设置
 //获取视频输出路径
