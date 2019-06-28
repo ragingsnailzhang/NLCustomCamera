@@ -25,6 +25,8 @@
 @property(nonatomic,strong)NLTopOptionsView *topView;
 //录制View
 @property(nonatomic,strong)NLRecordView *recordView;
+//录制时间View
+@property(nonatomic,strong)NLTimeView *recordTimeView;
 //选项View
 @property(nonatomic,strong)NLBottomOptionsView *optionsView;
 //设置界面
@@ -82,6 +84,11 @@
     self.topView.delegate = self;
     self.topView.beautyBtn.hidden = !self.param.isShowBeautyBtn;
     [self.view addSubview:self.topView];
+    
+    //录制时间View
+    self.recordTimeView = [[NLTimeView alloc]initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 35)];
+    self.recordTimeView.hidden = !self.topView.hidden;
+    [self.view addSubview:self.recordTimeView];
     
     //录制按钮View
     CGFloat recordHeight = TIMEVIEW_HEIGHT+STARTBTN_WIDTH+MARGIN*2.0;
@@ -154,6 +161,7 @@
 -(void)updateViewWithOptionsViewHidden:(BOOL)isHidden{
     self.optionsView.hidden = isHidden;
     self.recordView.hidden = !self.optionsView.hidden;
+    self.recordTimeView.hidden = self.recordView;
     if (self.param.getCurrentMode == videoMode) {
         self.topView.hidden = [NLRecordManager shareManager].isRecording;
     }else{
@@ -163,6 +171,7 @@
 //显示滤镜界面
 -(void)showFilterView{
     self.recordView.hidden = YES;
+    self.recordTimeView.hidden = self.recordView.hidden;
     NLFilterView *filterView = [[NLFilterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-SAFEAREA_BOTTOM_HEIGH-120, KSCREEN_WIDTH, 120)];
     self.filterView = filterView;
     filterView.viewStyle = blackViewStyle;
@@ -195,8 +204,8 @@
 }
 //更新时间状态
 -(void)reloadRecordTime:(CGFloat)time{
-    self.recordView.timeView.hidden = time>0 ? NO:YES;
-    self.recordView.timeView.timeLab.text = [NSString stringWithFormat:@"%02ld秒",(long)floorf(time)];
+    self.recordTimeView.hidden = time>0 ? NO:YES;
+    [self.recordTimeView reloadTime:(long)floorf(time)];
     [self.recordView.progressView updateProgressWithValue:time/self.param.maxTime];
 }
 //闪光灯隐藏与否
@@ -209,6 +218,8 @@
     [self.view bringSubviewToFront:self.topView];
     [self.view bringSubviewToFront:self.recordView];
     [self.view bringSubviewToFront:self.optionsView];
+    [self.view bringSubviewToFront:self.recordTimeView];
+
 }
 //MARK:NLBottomOptionsViewDelegate
 -(void)selectedClick{
@@ -330,6 +341,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if (self.filterView.window) {
         self.recordView.hidden = NO;
+        self.recordTimeView.hidden = self.recordView.hidden;
         [self.filterView removeFromSuperview];
     }
 }

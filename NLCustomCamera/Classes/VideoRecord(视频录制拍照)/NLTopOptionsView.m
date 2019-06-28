@@ -23,8 +23,9 @@
 -(void)layoutViews{
     //关闭按钮
     self.closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.closeBtn.frame = CGRectMake(MARGIN,(self.frame.size.height-23)/2, 23, 23);
-    [self.closeBtn setImage:[UIImage getBundleImageWithName:@"record_close" className:NSStringFromClass([self class])] forState:UIControlStateNormal];
+    UIImage *closeImg = [UIImage getBundleImageWithName:@"record_close" className:NSStringFromClass([self class])];
+    self.closeBtn.frame = CGRectMake(MARGIN,(self.frame.size.height-closeImg.size.height)/2, closeImg.size.width, closeImg.size.height);
+    [self.closeBtn setImage:closeImg forState:UIControlStateNormal];
     [self.closeBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.closeBtn];
     

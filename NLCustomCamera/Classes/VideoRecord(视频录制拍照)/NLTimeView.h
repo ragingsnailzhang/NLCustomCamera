@@ -12,4 +12,6 @@
 
 @property(nonatomic,strong)UILabel *timeLab;
 
+-(void)reloadTime:(NSInteger)time;
+
 @end

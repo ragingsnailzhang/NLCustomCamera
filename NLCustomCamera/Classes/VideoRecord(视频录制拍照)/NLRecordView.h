@@ -27,8 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NLRecordView : UIView
 
 @property(nonatomic,weak)id <NLRecordViewDelegate>delegate;
-//倒计时View
-@property(nonatomic,strong)NLTimeView *timeView;
 //摄像进度View
 @property(nonatomic,strong)NLProgressView *progressView;
 //拍照View

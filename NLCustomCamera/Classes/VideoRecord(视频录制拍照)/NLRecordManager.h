@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NLRecordManagerDelegate <NSObject>
 
 @optional
+//获取拍摄的照片
+-(void)getTakenPhoto:(UIImage *)photo;
 //获取视频数据流
 -(void)getVideoData:(NSData *)outputData URL:(NSURL *)outputURL;
 //录制时间

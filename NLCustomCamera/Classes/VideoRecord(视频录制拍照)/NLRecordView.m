@@ -38,10 +38,6 @@
     return self;
 }
 -(void)layoutViews{
-    //倒计时View
-    self.timeView = [[NLTimeView alloc]initWithFrame:CGRectMake((KSCREEN_WIDTH-STARTBTN_WIDTH)/2,0, STARTBTN_WIDTH, TIMEVIEW_HEIGHT)];
-    self.timeView.hidden = YES;
-    [self addSubview:self.timeView];
     //拍照
     self.photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.photoBtn setImage:[UIImage getBundleImageWithName:@"record_start" className:NSStringFromClass([self class])] forState:UIControlStateNormal];
@@ -53,7 +49,7 @@
     }];
     
     //摄像
-    self.progressView = [[NLProgressView alloc]initWithFrame:CGRectMake((KSCREEN_WIDTH-STARTBTN_WIDTH)/2, self.timeView.frame.origin.y+self.timeView.frame.size.height, STARTBTN_WIDTH, STARTBTN_WIDTH)];
+    self.progressView = [[NLProgressView alloc]initWithFrame:CGRectMake((KSCREEN_WIDTH-STARTBTN_WIDTH)/2, 0, STARTBTN_WIDTH, STARTBTN_WIDTH)];
     self.progressView.backgroundColor = [UIColor clearColor];
     self.progressView.alpha = ([NLRecordManager shareManager].recordParam.shootMode == videoMode) ? 1.0f:0.0f;
     [self addSubview:self.progressView];

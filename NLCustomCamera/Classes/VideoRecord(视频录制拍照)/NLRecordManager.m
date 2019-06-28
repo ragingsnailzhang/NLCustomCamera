@@ -107,6 +107,9 @@ static dispatch_once_t onceToken;
 }
 -(void)savePhoto{
     if (self.currentShootImage) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(getTakenPhoto:)]) {
+            [self.delegate getTakenPhoto:self.currentShootImage];
+        }
         UIImageWriteToSavedPhotosAlbum(self.currentShootImage, nil, nil, nil);
         self.currentShootImage = nil;
     }

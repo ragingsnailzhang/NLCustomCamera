@@ -10,7 +10,7 @@
 #import <NLCustomCamera.h>
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
-@interface NLViewController ()
+@interface NLViewController ()<NLRecordManagerDelegate>
 
 @end
 
@@ -30,8 +30,17 @@
     [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(__kindof UIControl * _Nullable x) {
         NLRecordParam *param = [NLRecordParam recordConfigWithVideoRatio:NLShootRatioFullScreen shootMode:photoVideoMode position:AVCaptureDevicePositionBack maxRecordTime:15.0f minRecordTime:1.0f isCompression:NO waterMark:nil isFilter:YES isShowBeautyBtn:YES isShowAlbumBtn:YES currentVC:self];
         [NLRecordManager shareManager].recordParam = param;
+        [NLRecordManager shareManager].delegate = self;
         NLPhotoViewController *page = [NLPhotoViewController new];
         [self presentViewController:page animated:YES completion:nil];
     }];
 }
+//MARK:NLRecordManagerDelegate
+-(void)getTakenPhoto:(UIImage *)photo{
+    NSLog(@"%@",photo);
+}
+-(void)getVideoData:(NSData *)outputData DataURL:(NSURL *)outputURL CoverURL:(NSURL *)coverURL Image:(UIImage *)coverImage{
+    NSLog(@"%@-%@-%@-%@",outputURL,coverURL,coverImage,outputData);
+}
+
 @end
