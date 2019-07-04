@@ -171,7 +171,6 @@
 //显示滤镜界面
 -(void)showFilterView{
     self.recordView.hidden = YES;
-    self.recordTimeView.hidden = self.recordView.hidden;
     NLFilterView *filterView = [[NLFilterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-SAFEAREA_BOTTOM_HEIGH-120, KSCREEN_WIDTH, 120)];
     self.filterView = filterView;
     filterView.viewStyle = blackViewStyle;
@@ -341,7 +340,6 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if (self.filterView.window) {
         self.recordView.hidden = NO;
-        self.recordTimeView.hidden = self.recordView.hidden;
         [self.filterView removeFromSuperview];
     }
 }
