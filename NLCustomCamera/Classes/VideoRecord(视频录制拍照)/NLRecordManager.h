@@ -35,9 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 //录制时间
 -(void)getRecordTime:(CGFloat)time;
 //录制封面
--(void)getRecordVideoCoverURL:(NSURL *)coverURL Image:(UIImage *)coverImage;
+-(void)getRecordVideoCoverURL:(NSURL *)coverURL image:(UIImage *)coverImage;
 //获取视频数据流,录制封面
--(void)getVideoData:(NSData *)outputData DataURL:(NSURL *)outputURL CoverURL:(NSURL *)coverURL Image:(UIImage *)coverImage;
+-(void)getVideoData:(NSData *)outputData dataURL:(NSURL *)outputURL coverURL:(NSURL *)coverURL coverImage:(UIImage *)coverImage recordTime:(CGFloat)recordTime;
 
 @end
 

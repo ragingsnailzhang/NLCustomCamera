@@ -39,8 +39,8 @@
 -(void)getTakenPhoto:(UIImage *)photo{
     NSLog(@"%@",photo);
 }
--(void)getVideoData:(NSData *)outputData DataURL:(NSURL *)outputURL CoverURL:(NSURL *)coverURL Image:(UIImage *)coverImage{
-    NSLog(@"%@-%@-%@-%@",outputURL,coverURL,coverImage,outputData);
+-(void)getVideoData:(NSData *)outputData dataURL:(NSURL *)outputURL coverURL:(NSURL *)coverURL coverImage:(UIImage *)coverImage recordTime:(CGFloat)recordTime{
+    NSLog(@"%@-%@-%@-%.2f",outputURL,coverURL,coverImage,recordTime);
 }
 
 @end

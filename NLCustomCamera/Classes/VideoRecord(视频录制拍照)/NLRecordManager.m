@@ -247,13 +247,18 @@ static dispatch_once_t onceToken;
     //回调视频封面
     UIImage *cover = [NLFileManager getThumbnailImage:url];
     NSString *localCoverPath = [NLFileManager getVideoCoverWithImage:cover AndName:[url.absoluteString componentsSeparatedByString:@"/"].lastObject];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getRecordVideoCoverURL:Image:)]) {
-        [self.delegate getRecordVideoCoverURL:[NSURL URLWithString:localCoverPath] Image:cover];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getRecordVideoCoverURL:image:)]) {
+        [self.delegate getRecordVideoCoverURL:[NSURL URLWithString:localCoverPath] image:cover];
         [self removeLoadingView];
     }
     //回调视频封面与视频资源
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getVideoData:DataURL:CoverURL:Image:)]) {
-        [self.delegate getVideoData:data DataURL:url CoverURL:[NSURL URLWithString:localCoverPath] Image:cover];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getVideoData:dataURL:coverURL:coverImage:recordTime:)]) {
+        [self.delegate getVideoData:data dataURL:url coverURL:[NSURL URLWithString:localCoverPath] coverImage:cover recordTime:self.time];
+        [self removeLoadingView];
+    }
+    //回调视频时间
+    if (self.delegate && [self.delegate respondsToSelector:@selector(getRecordTime:)]) {
+        [self.delegate getRecordTime:self.time];
         [self removeLoadingView];
     }
 }
@@ -515,7 +520,7 @@ static dispatch_once_t onceToken;
         _displayView = [[NLGPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _displayView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     }
-
+    
     return _displayView;
 }
 //MARK:私有方法

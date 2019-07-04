@@ -33,7 +33,7 @@
     [self addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self).offset((9+10)/2);
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(self.mas_bottom).offset(-17.5);
     }];
     
     UIView *timeView = [UIView new];

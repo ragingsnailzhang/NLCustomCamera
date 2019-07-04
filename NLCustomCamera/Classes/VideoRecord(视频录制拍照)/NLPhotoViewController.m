@@ -86,7 +86,7 @@
     [self.view addSubview:self.topView];
     
     //录制时间View
-    self.recordTimeView = [[NLTimeView alloc]initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 35)];
+    self.recordTimeView = [[NLTimeView alloc]initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 35+SAFEAREA_TOP_HEIGH-20)];
     self.recordTimeView.hidden = !self.topView.hidden;
     [self.view addSubview:self.recordTimeView];
     
