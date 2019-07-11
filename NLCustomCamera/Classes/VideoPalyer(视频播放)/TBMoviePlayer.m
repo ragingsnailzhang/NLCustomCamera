@@ -44,7 +44,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor blackColor];
     self.fatherView = [UIView new];
-    self.fatherView.frame = CGRectMake(0, [self tz_isIPhoneX]?24:0, KSCREEN_WIDTH, [self tz_isIPhoneX]?KSCREEN_HEIGHT-24-34:KSCREEN_HEIGHT);
+    self.fatherView.frame = CGRectMake(0, IS_PhoneXAll ? 24 : 0, KSCREEN_WIDTH, IS_PhoneXAll ? KSCREEN_HEIGHT-24-34 : KSCREEN_HEIGHT);
     [self.view addSubview:self.fatherView];
 
     self.model.fatherView = self.fatherView;
@@ -52,8 +52,11 @@
     
     self.player = [[ZFPlayerView alloc]init];
     self.player.delegate = self;
+    self.player.forcePortrait = YES;
+    self.player.fullScreenPlay = YES;
     [self.player playerModel:self.model];
     [self.player autoPlayTheVideo];
+
 }
 //获取视频
 - (UIImage*)getImageWithColor:(UIColor*)color andHeight:(CGFloat)height{
@@ -72,22 +75,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
     
-- (BOOL)tz_isIPhoneX {
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
-    if ([platform isEqualToString:@"i386"] || [platform isEqualToString:@"x86_64"]) {
-        // 模拟器下采用屏幕的高度来判断
-        return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||
-                CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));
-    }
-    // iPhone10,6是美版iPhoneX 感谢hegelsu指出：https://github.com/banchichen/TZImagePickerController/issues/635
-    BOOL IPhoneX = [platform isEqualToString:@"iPhone10,3"] || [platform isEqualToString:@"iPhone10,6"];
-    return IPhoneX;
-}
-    
 - (CGFloat)tz_statusBarHeight {
-    return [self tz_isIPhoneX] ? 44 : 20;
+    return IS_PhoneXAll ? 44 : 20;
 }
 
 - (ZFPlayerModel *)model{
@@ -95,6 +84,21 @@
         _model = [ZFPlayerModel new];
     }
     return _model;
+}
+
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 @end

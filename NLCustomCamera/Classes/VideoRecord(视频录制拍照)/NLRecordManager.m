@@ -39,7 +39,7 @@
 @property(nonatomic,strong)GPUImageBeautifyFilter *beautifyFilter;
 /** 当前滤镜 */
 @property(nonatomic,strong)GPUImageFilter *currentFilter;
-/** 重力感应 */
+///** 重力感应 */
 @property(nonatomic,strong)NLMotionManager *motionManager;
 //当前拍摄的图像
 @property(nonatomic,strong)UIImage *currentShootImage;
@@ -64,7 +64,6 @@ static dispatch_once_t onceToken;
 }
 -(instancetype)init{
     if (self = [super init]) {
-        _motionManager = [[NLMotionManager alloc]init];
         _currentFilter = [GPUImageFilter new];
         _semaphore = dispatch_semaphore_create(1);
     }
@@ -95,7 +94,7 @@ static dispatch_once_t onceToken;
 //MARK:拍照
 -(void)shootPhoto{
     __weak __typeof(&*self)weakSelf = self;
-    [self.shootCamera capturePhotoAsImageProcessedUpToFilter:self.currentFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+    [self.shootCamera capturePhotoAsImageProcessedUpToFilter:self.currentFilter withOrientation:[self currentImageOrientation] withCompletionHandler:^(UIImage *processedImage, NSError *error) {
         NSLog(@"拍照%@",processedImage);
         weakSelf.currentShootImage = processedImage;
         [weakSelf endShootPhoto];
@@ -478,20 +477,20 @@ static dispatch_once_t onceToken;
 }
 
 // 当前设备取向
-- (AVCaptureVideoOrientation)currentVideoOrientation{
-    AVCaptureVideoOrientation orientation;
+- (UIImageOrientation)currentImageOrientation{
+    UIImageOrientation orientation;
     switch (self.motionManager.deviceOrientation) {
         case UIDeviceOrientationPortrait:
-            orientation = AVCaptureVideoOrientationPortrait;
+            orientation = UIImageOrientationUp;
             break;
         case UIDeviceOrientationLandscapeRight:
-            orientation = AVCaptureVideoOrientationLandscapeLeft;
+            orientation = UIImageOrientationRight;
             break;
         case UIDeviceOrientationPortraitUpsideDown:
-            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            orientation = UIImageOrientationDown;
             break;
         default:
-            orientation = AVCaptureVideoOrientationLandscapeRight;
+            orientation = UIImageOrientationLeft;
             break;
     }
     return orientation;
@@ -522,6 +521,12 @@ static dispatch_once_t onceToken;
     }
     
     return _displayView;
+}
+-(NLMotionManager *)motionManager{
+    if (_motionManager == nil) {
+        _motionManager = [[NLMotionManager alloc]init];
+    }
+    return _motionManager;
 }
 //MARK:私有方法
 //添加加载动画

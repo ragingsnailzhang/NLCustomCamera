@@ -227,10 +227,10 @@
         if (self.param.getCurrentMode == videoMode) {//视频
             //保存视频
             [[NLRecordManager shareManager]saveVideo];
-            
-            [self.playerVC removeFromParentViewController];
             [self.playerVC.view removeFromSuperview];
-            
+            [self.playerVC removeFromParentViewController];
+            self.playerVC = nil;
+
             [self reloadRecordTime:0];
         }else{//照片
             [[NLRecordManager shareManager]savePhoto];
@@ -251,8 +251,9 @@
     [self updateViewWithOptionsViewHidden:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.param.getCurrentMode == videoMode) {//视频
-            [self.playerVC removeFromParentViewController];
             [self.playerVC.view removeFromSuperview];
+            [self.playerVC removeFromParentViewController];
+            self.playerVC = nil;
             [self reloadRecordTime:0];
         }
         [self readyRecordVideo];

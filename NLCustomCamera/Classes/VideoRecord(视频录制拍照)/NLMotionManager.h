@@ -6,10 +6,10 @@
 //  Copyright © 2018年 yj_zhang. All rights reserved.
 //
 
-#import "GPUImageView.h"
+#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface NLMotionManager : GPUImageView
+@interface NLMotionManager : NSObject
 
 @property(nonatomic, assign)UIDeviceOrientation deviceOrientation;
 
