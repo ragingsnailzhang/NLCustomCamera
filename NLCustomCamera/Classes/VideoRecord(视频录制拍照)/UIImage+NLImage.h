@@ -13,6 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(UIImage *)getBundleImageWithName:(NSString *)imageName className:(NSString *)className;
 
+/**
+ *  @brief  修正图片的方向
+ *  @param  srcImg 图片
+ *  @return 修正方向后的图片
+ */
++ (UIImage *)nl_fixOrientation:(UIImage *)srcImg;
+
 @end
 
 NS_ASSUME_NONNULL_END

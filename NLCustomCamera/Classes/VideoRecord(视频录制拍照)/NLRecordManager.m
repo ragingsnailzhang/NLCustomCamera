@@ -15,6 +15,7 @@
 #import "NLPhotoViewController.h"
 #import "NLFileManager.h"
 #import "NLConfigure.h"
+#import "UIImage+NLImage.h"
 
 @interface NLRecordManager ()<GPUImageVideoCameraDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVCaptureMetadataOutputObjectsDelegate>
 /** 摄像头 */
@@ -39,7 +40,7 @@
 @property(nonatomic,strong)GPUImageBeautifyFilter *beautifyFilter;
 /** 当前滤镜 */
 @property(nonatomic,strong)GPUImageFilter *currentFilter;
-///** 重力感应 */
+/** 重力感应 */
 @property(nonatomic,strong)NLMotionManager *motionManager;
 //当前拍摄的图像
 @property(nonatomic,strong)UIImage *currentShootImage;
@@ -72,6 +73,7 @@ static dispatch_once_t onceToken;
 
 //MARK:配置参数
 -(void)initDataWithParam:(NLRecordParam *)param{
+    self.motionManager = [[NLMotionManager alloc]init];
     self.recordParam = param;
     self.videoOutputURL = [NSURL fileURLWithPath:[self getVideoOutputPath]];
     self.time = 0.0f;
@@ -107,7 +109,8 @@ static dispatch_once_t onceToken;
 -(void)savePhoto{
     if (self.currentShootImage) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(getTakenPhoto:)]) {
-            [self.delegate getTakenPhoto:self.currentShootImage];
+            UIImage *fixImage = [UIImage nl_fixOrientation:self.currentShootImage];
+            [self.delegate getTakenPhoto:fixImage];
         }
         UIImageWriteToSavedPhotosAlbum(self.currentShootImage, nil, nil, nil);
         self.currentShootImage = nil;
@@ -489,8 +492,11 @@ static dispatch_once_t onceToken;
         case UIDeviceOrientationPortraitUpsideDown:
             orientation = UIImageOrientationDown;
             break;
-        default:
+        case UIDeviceOrientationLandscapeLeft:
             orientation = UIImageOrientationLeft;
+            break;
+        default:
+            orientation = UIImageOrientationUp;
             break;
     }
     return orientation;
@@ -521,12 +527,6 @@ static dispatch_once_t onceToken;
     }
     
     return _displayView;
-}
--(NLMotionManager *)motionManager{
-    if (_motionManager == nil) {
-        _motionManager = [[NLMotionManager alloc]init];
-    }
-    return _motionManager;
 }
 //MARK:私有方法
 //添加加载动画

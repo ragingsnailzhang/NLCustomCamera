@@ -12,6 +12,8 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 @interface NLViewController ()<NLRecordManagerDelegate>
 
+@property(nonatomic,strong)UIImageView *coverImageView;
+
 @end
 
 @implementation NLViewController
@@ -34,13 +36,27 @@
         NLPhotoViewController *page = [NLPhotoViewController new];
         [self presentViewController:page animated:YES completion:nil];
     }];
+    
+    UIImageView *imgView = [[UIImageView alloc]init];
+    self.coverImageView = imgView;
+    imgView.clipsToBounds = YES;
+    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:imgView];
+    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(btn.mas_bottom).offset(30);
+        make.size.mas_equalTo(CGSizeMake(self.view.bounds.size.width, 300));
+        make.centerX.equalTo(self.view);
+    }];
+    
 }
 //MARK:NLRecordManagerDelegate
 -(void)getTakenPhoto:(UIImage *)photo{
     NSLog(@"%@",photo);
+    self.coverImageView.image = photo;
 }
 -(void)getVideoData:(NSData *)outputData dataURL:(NSURL *)outputURL coverURL:(NSURL *)coverURL coverImage:(UIImage *)coverImage recordTime:(CGFloat)recordTime{
     NSLog(@"%@-%@-%@-%.2f",outputURL,coverURL,coverImage,recordTime);
+    self.coverImageView.image = coverImage;
 }
 
 @end
