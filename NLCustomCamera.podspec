@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NLCustomCamera'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = '自定义相机,功能支持拍摄视频(支持滤镜),照相(支持滤镜),三种模式选择(视频,拍照,二者结存) '
 
 # This description is used to generate tags and improve search results.
